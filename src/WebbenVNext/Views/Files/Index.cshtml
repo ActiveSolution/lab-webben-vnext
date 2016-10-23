@@ -1,1 +1,6 @@
 ﻿<h2>Filer</h2>
+
+<form method="post" asp-action="Index" asp-controller="Files" enctype="multipart/form-data">
+    <input type="file" name="files" multiple />
+    <input type="submit" value="Upload" />
+</form>
