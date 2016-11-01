@@ -4,6 +4,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using System.Linq;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace WebbenVNext.Storage
 {
@@ -13,12 +15,12 @@ namespace WebbenVNext.Storage
         Task<IEnumerable<string>> GetAllBlobUrls();
     }
 
-    public class FilesystemBlobs : IBlobs
+    public class LocalBlobs : IBlobs
     {
         private const string FilesRootDirectoryName = "uploads";
         private readonly IHostingEnvironment _environment;
 
-        public FilesystemBlobs(IHostingEnvironment environment)
+        public LocalBlobs(IHostingEnvironment environment)
         {
             this._environment = environment;
         }
@@ -61,6 +63,31 @@ namespace WebbenVNext.Storage
             var url = path.Replace(@"\", "/");
 
             return url;
+        }
+    }
+
+    public class AzureBlobs : IBlobs
+    {
+        private readonly CloudBlobContainer _container;
+
+        public AzureBlobs(CloudStorageAccount storageAccount)
+        {
+            var blobClient = storageAccount.CreateCloudBlobClient();
+            _container = blobClient.GetContainerReference("uploads");
+        }
+
+        public async Task Save(string name, Stream file)
+        {
+            await _container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Blob, null, null);
+            var blob = _container.GetBlockBlobReference(name);
+            await blob.UploadFromStreamAsync(file);
+        }
+
+        public async Task<IEnumerable<string>> GetAllBlobUrls()
+        {
+            await _container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Blob, null, null);
+            var blobs = await _container.ListBlobsSegmentedAsync(null);
+            return blobs.Results.Select(x => x.Uri.AbsoluteUri);
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.WindowsAzure.Storage;
 using WebbenVNext.Storage;
 
 namespace WebbenVNext
@@ -15,6 +16,12 @@ namespace WebbenVNext
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets();
+            }
+
             Configuration = builder.Build();
         }
 
@@ -23,7 +30,16 @@ namespace WebbenVNext
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<IBlobs, FilesystemBlobs>();
+
+            // Local blobs
+            // services.AddTransient<IBlobs, LocalBlobs>();
+
+            // Azure blobs
+            var azureBlobConnectionString = Configuration.GetValue<string>("AzureBlobConnectionString");
+            var storageAccount = CloudStorageAccount.Parse(azureBlobConnectionString);
+            services.AddSingleton(storageAccount);
+
+            services.AddSingleton<IBlobs, AzureBlobs>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
