@@ -9,10 +9,15 @@
         <div class="card">
             <div class="card-block">
                 <form method="post" asp-action="Index" asp-controller="Home" enctype="multipart/form-data">
-                    <input type="file" name="files" multiple accept="image/*"/>
-                    <input type="submit" value="Upload"/>
+                    <input type="file" name="files" multiple accept="image/*" id="files" />
+                    <input type="submit" value="Upload" />
                 </form>
             </div>
+        </div>
+        
+        <h3>Förhandsgranskning</h3>
+        <div id="files-preview">
+            
         </div>
     </div>
     <div class="col-md-6">

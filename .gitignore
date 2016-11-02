@@ -253,3 +253,4 @@ paket-files/
 
 # Uploads
 /src/WebbenVNext/wwwroot/uploads
+/src/WebbenVNext/wwwroot/dist
