@@ -6,7 +6,6 @@
     "typescript": "2.0.6",
     "gulp": "3.9.1",
     "gulp-typescript": "3.1.2",
-    "gulp-watch": "4.3.10",
-    "@types/core-js": "0.9.34"
+    "gulp-watch": "4.3.10"
   }
 }

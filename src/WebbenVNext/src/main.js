@@ -1,40 +1,33 @@
-﻿class PreviewImage {
-    constructor(private url: string) { }
-
-    public toHtml(): string {
+class PreviewImage {
+    constructor(url) {
+        this.url = url;
+    }
+    toHtml() {
         return `<div class="card">
                     <img src="${this.url}" class="img-fluid" />
                 </div>`;
     }
 }
-
 class FileApplication {
-    private filesInput: HTMLInputElement;
-    private filesPreviewWrapper: HTMLDivElement;
-
     constructor() {
-        this.filesInput = document.querySelector('#files') as HTMLInputElement;
-        this.filesPreviewWrapper = document.querySelector('#files-preview') as HTMLDivElement;
+        this.filesInput = document.querySelector('#files');
+        this.filesPreviewWrapper = document.querySelector('#files-preview');
     }
-
-    public run(): void {
+    run() {
         if (this.filesInput !== undefined && this.filesPreviewWrapper !== undefined) {
             this.filesInput.addEventListener('change', event => {
                 this.previewImages();
             });
         }
     }
-
-    private previewImages(): void {
+    previewImages() {
         this.filesPreviewWrapper.innerHTML = '';
-
         let files = this.filesInput.files;
         for (let i = 0; i < files.length; i++) {
             this.previewImage(files[0]);
         }
     }
-
-    private previewImage(file: File) {
+    previewImage(file) {
         let fileReader = new FileReader();
         fileReader.addEventListener('load', () => {
             let image = new PreviewImage(fileReader.result);
@@ -43,6 +36,6 @@ class FileApplication {
         fileReader.readAsDataURL(file);
     }
 }
-
 var app = new FileApplication();
 app.run();
+//# sourceMappingURL=main.js.map

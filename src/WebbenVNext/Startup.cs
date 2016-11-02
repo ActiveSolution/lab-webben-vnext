@@ -14,7 +14,6 @@ namespace WebbenVNext
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
@@ -30,16 +29,17 @@ namespace WebbenVNext
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddOptions();
 
             // Local blobs
             // services.AddTransient<IBlobs, LocalBlobs>();
 
             // Azure blobs
-            var azureBlobConnectionString = Configuration.GetValue<string>("AzureBlobConnectionString");
-            var storageAccount = CloudStorageAccount.Parse(azureBlobConnectionString);
-            services.AddSingleton(storageAccount);
-
             services.AddSingleton<IBlobs, AzureBlobs>();
+            services.Configure<AzureBlobsOptions>(options =>
+            {
+                options.StorageConnectionString = Configuration.GetValue<string>("AzureBlobConnectionString");
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

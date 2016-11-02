@@ -1,14 +1,15 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "compileOnSave": false,
     "target": "es6"
   },
   "exclude": [
     "node_modules",
+    "**/*.d.ts",
     "wwwroot"
   ]
 }
