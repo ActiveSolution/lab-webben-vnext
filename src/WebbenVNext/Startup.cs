@@ -12,7 +12,6 @@ namespace WebbenVNext
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
                 .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
@@ -43,11 +42,6 @@ namespace WebbenVNext
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
