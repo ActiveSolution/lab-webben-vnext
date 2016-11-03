@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage;
 using WebbenVNext.Storage;
 
 namespace WebbenVNext
@@ -32,10 +31,10 @@ namespace WebbenVNext
             services.AddOptions();
 
             // Local blobs
-            // services.AddTransient<IBlobs, LocalBlobs>();
+            //services.AddTransient<IBlobs, LocalBlobs>();
 
             // Azure blobs
-            services.AddSingleton<IBlobs, AzureBlobs>();
+            services.AddTransient<IBlobs, AzureBlobs>();
             services.Configure<AzureBlobsOptions>(options =>
             {
                 options.StorageConnectionString = Configuration.GetValue<string>("AzureBlobConnectionString");
