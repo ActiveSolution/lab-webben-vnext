@@ -12,6 +12,7 @@ namespace WebbenVNext
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
                 .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
