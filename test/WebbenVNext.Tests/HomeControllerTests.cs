@@ -15,7 +15,7 @@ namespace WebbenVNext.Tests
         public class HomeControllerTests
         {
             [TestMethod]
-            public async Task HomeIndexSholdReturnFIlesFromBlobProvider()
+            public async Task HomeIndexSholdReturnFilesFromBlobProvider()
             {
                 var blobUrls = new[] { "/file1.png", "/file2.jpg" };
                 var mockedBlob = new Mock<IBlobs>();
