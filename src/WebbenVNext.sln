@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebbenVNext", "WebbenVNext\WebbenVNext.csproj", "{DA0281F7-79D6-4B46-BF1B-2C94C48A5B53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{1A859A1C-F0BD-4CE5-845D-195D559676E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebbenVNext.Tests", "WebbenVNext.Tests\WebbenVNext.Tests.csproj", "{07C01FDD-E656-4877-81D0-FC12417BFE46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA0281F7-79D6-4B46-BF1B-2C94C48A5B53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0281F7-79D6-4B46-BF1B-2C94C48A5B53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0281F7-79D6-4B46-BF1B-2C94C48A5B53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0281F7-79D6-4B46-BF1B-2C94C48A5B53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C01FDD-E656-4877-81D0-FC12417BFE46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C01FDD-E656-4877-81D0-FC12417BFE46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C01FDD-E656-4877-81D0-FC12417BFE46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C01FDD-E656-4877-81D0-FC12417BFE46}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{07C01FDD-E656-4877-81D0-FC12417BFE46} = {1A859A1C-F0BD-4CE5-845D-195D559676E1}
+	EndGlobalSection
+EndGlobal
