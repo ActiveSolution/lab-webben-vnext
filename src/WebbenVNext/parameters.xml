@@ -1,3 +1,0 @@
-﻿<parameters>
-  <parameter name="IIS Web Application Name" defaultValue="webbenvnext" tags="IisApp" />
-</parameters>
